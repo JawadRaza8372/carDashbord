@@ -1,9 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../store/authSlice";
 import "./AuthScreen.scss";
 function Home() {
   const [loginForm, setloginForm] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
   const submitFun = (e) => {
     e.preventDefault();
+    if (loginForm.email === "admin@admin.com") {
+      if (loginForm.password === "admin123") {
+        dispatch(setAuth({ isAuth: "avalble" }));
+        localStorage.setItem("carAdminDashbord", "avalble");
+      } else {
+        alert("Wrong Password.");
+      }
+    } else {
+      alert("Invalid Email.");
+    }
     console.log("submit", loginForm);
   };
   const changeText = (e) => {
@@ -25,6 +38,7 @@ function Home() {
             type="email"
             placeholder="email"
             id="email"
+            minLength={11}
             onChange={changeText}
           />
           <input

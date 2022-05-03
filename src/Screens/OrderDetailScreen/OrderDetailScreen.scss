@@ -1,0 +1,51 @@
+@import "../../Colors.scss";
+@import "~video-react/styles/scss/video-react";
+
+.orderdeltscreen {
+  width: 95%;
+  height: 100vh;
+  margin: 0 auto;
+  align-self: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  .ordernumber {
+    width: 100%;
+    height: 70px;
+    margin-top: 20px;
+    background-color: $primary_color;
+    @include allCenter;
+    flex-direction: column;
+    h1 {
+      color: $secondry_color;
+      font-weight: 500 !important;
+    }
+    h2 {
+      color: $secondry_color;
+      font-weight: bold;
+    }
+  }
+  img {
+    width: 90%;
+    max-width: 500px;
+    height: 300px;
+    object-fit: contain;
+  }
+  .playvide {
+    width: 90%;
+    max-width: 500px;
+    height: 300px;
+  }
+  p {
+    color: $primary_color;
+    width: 92%;
+    overflow: hidden;
+    margin: 10px 0;
+    @include fontSizeP(1vh);
+    span {
+      font-weight: bold;
+      margin-right: 10px;
+      color: $primary_color;
+      text-decoration: underline;
+    }
+  }
+}

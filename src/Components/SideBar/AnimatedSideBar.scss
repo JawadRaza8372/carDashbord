@@ -32,35 +32,27 @@
         position: relative;
         display: flex;
         align-items: center;
+        justify-content: center;
         width: 90%;
         border-radius: 12px;
         margin: 0 auto;
         background-color: $secondry_color;
         #logoutbutton {
           color: $primary_color;
-          position: absolute;
-          top: 50%;
-          left: 50%;
+          // position: absolute;
+          // top: 50%;
+          // left: 50%;
           font-size: 28px !important;
-          transform: translate(-50%, -50%);
+          // transform: translate(-50%, -50%);
+          margin: 0 10px;
           cursor: pointer;
         }
-        .profileDetails {
-          color: $primary_color;
+
+        .username {
+          font-size: 20px;
+          margin-left: 10px;
+          font-weight: 700;
           display: none;
-          overflow: hidden;
-          img {
-            width: 40px;
-            height: 40px;
-            border: 2px solid $primary_color;
-            border-radius: 50%;
-            overflow: hidden;
-          }
-          .username {
-            font-size: 20px;
-            margin-left: 10px;
-            font-weight: 700;
-          }
         }
       }
     }
@@ -187,15 +179,8 @@
           #logoutbutton {
             left: 85%;
           }
-          .profileDetails {
-            display: flex;
-            align-items: center;
-            width: 70%;
-            overflow: hidden;
-            margin: 5px 0;
-            img {
-              margin-left: 10px;
-            }
+          .username {
+            display: block;
           }
         }
       }

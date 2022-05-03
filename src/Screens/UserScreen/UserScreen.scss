@@ -1,0 +1,8 @@
+@import "../../Colors.scss";
+.usercont {
+  @include gridSystem(4);
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 0;
+}

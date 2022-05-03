@@ -1,9 +1,12 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import DashbordScreen from "../Screens/DashbordScreen/DashbordScreen";
 import AuthScreen from "../Screens/AuthScreen/AuthScreen";
 import UserScreen from "../Screens/UserScreen/UserScreen";
-const user = "null";
+import AddUserScreen from "../Screens/AddUserScreen/AddUserScreen";
+import OrderScreen from "../Screens/OrderScreen/OrderScreen";
+import OrderDetailScreen from "../Screens/OrderDetailScreen/OrderDetailScreen";
+import { useSelector } from "react-redux";
+
 function Routess() {
   return (
     <Routes>
@@ -15,19 +18,36 @@ function Routess() {
           </AuthRoute>
         }
       />
+
       <Route
-        path="/dashord"
+        path="/userList"
         element={
           <ProtectedRoute>
-            <DashbordScreen />
+            <UserScreen />
           </ProtectedRoute>
         }
       />
       <Route
-        path="/users"
+        path="/addusers"
         element={
           <ProtectedRoute>
-            <UserScreen />
+            <AddUserScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/orders"
+        element={
+          <ProtectedRoute>
+            <OrderScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/order/:id"
+        element={
+          <ProtectedRoute>
+            <OrderDetailScreen />
           </ProtectedRoute>
         }
       />
@@ -36,9 +56,12 @@ function Routess() {
   );
 }
 let ProtectedRoute = ({ children }) => {
-  return user ? children : <Navigate to="/" />;
+  const { isAuth } = useSelector((state) => state.auth);
+  return isAuth ? children : <Navigate to="/" />;
 };
 let AuthRoute = ({ children }) => {
-  return user ? <Navigate to="/dashord" /> : children;
+  const { isAuth } = useSelector((state) => state.auth);
+
+  return isAuth ? <Navigate to="/userList" /> : children;
 };
 export default Routess;
