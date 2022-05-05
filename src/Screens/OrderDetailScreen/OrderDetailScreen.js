@@ -8,12 +8,11 @@ import Loader from "../../Components/Loader/Loader";
 
 function OrderDetailScreen() {
   const { id } = useParams();
-  const { setisLoading, isLoading } = useLoadingWithRefreash();
+  const { isLoading } = useLoadingWithRefreash();
 
   const { orders } = useSelector((state) => state.project);
   const data = orders.filter((dat) => dat._id === id);
   const {
-    _id,
     ClientName,
     ClientNumber,
     ClientIdentityNumber,

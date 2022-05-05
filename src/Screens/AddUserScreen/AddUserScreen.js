@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import "./AddUserScreen.scss";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setEmploys } from "../../store/projectSlice";
-import { apiurl } from "../../App";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
 
 function AddUserScreen() {
-  const dispatch = useDispatch();
-  const { setisLoading, isLoading } = useLoadingWithRefreash();
+  const { setisLoading } = useLoadingWithRefreash();
 
   const [formSubmit, setformSubmit] = useState({
     Name: "",

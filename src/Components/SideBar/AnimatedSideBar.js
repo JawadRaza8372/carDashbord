@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./AnimatedSideBar.scss";
-import AcUnitIcon from "@material-ui/icons/AcUnit";
 import MenuIcon from "@material-ui/icons/Menu";
-import GridViewIcon from "@material-ui/icons/GridOn";
-import HomeIcon from "@material-ui/icons/Home";
-import InfoIcon from "@material-ui/icons/Info";
-import AddLocationIcon from "@material-ui/icons/AddLocation";
 import MenuBook from "@material-ui/icons/MenuBook";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
