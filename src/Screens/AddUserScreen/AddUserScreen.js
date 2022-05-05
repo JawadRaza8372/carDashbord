@@ -48,6 +48,9 @@ function AddUserScreen() {
       <form className="adduserform" onSubmit={adduserfunc}>
         <h1 className="formHeading"> Add User</h1>
         <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
           type={"text"}
           placeholder="Name"
           minLength={5}
@@ -56,6 +59,9 @@ function AddUserScreen() {
           onChange={handleChange}
         />
         <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
           type={"email"}
           placeholder="Email"
           minLength={9}
@@ -64,6 +70,9 @@ function AddUserScreen() {
           onChange={handleChange}
         />
         <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
           type={"number"}
           minLength={10}
           placeholder="CNIC"
@@ -72,6 +81,9 @@ function AddUserScreen() {
           onChange={handleChange}
         />
         <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
           type={"number"}
           id="Number"
           minLength={12}
@@ -80,6 +92,9 @@ function AddUserScreen() {
           onChange={handleChange}
         />
         <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
           type={"text"}
           placeholder="Address"
           id="Address"
@@ -88,6 +103,9 @@ function AddUserScreen() {
           onChange={handleChange}
         />
         <input
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
           type={"text"}
           placeholder="Password"
           id="Password"

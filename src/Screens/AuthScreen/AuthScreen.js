@@ -40,6 +40,9 @@ function Home() {
             id="email"
             minLength={11}
             onChange={changeText}
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
           />
           <input
             type="password"
@@ -47,6 +50,9 @@ function Home() {
             id="password"
             minLength={5}
             onChange={changeText}
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
           />
           <button type="submit">Login</button>
         </form>
