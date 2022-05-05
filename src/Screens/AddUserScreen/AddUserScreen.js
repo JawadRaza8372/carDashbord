@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddUserScreen.scss";
 import axios from "axios";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
+import { apiurl } from "../../App";
 
 function AddUserScreen() {
   const { setisLoading } = useLoadingWithRefreash();
@@ -16,7 +17,7 @@ function AddUserScreen() {
   });
   const adduserfunc = async (e) => {
     e.preventDefault();
-    const rest = await axios.post(`/Employee/signup`, {
+    const rest = await axios.post(`${apiurl}/Employee/signup`, {
       ...formSubmit,
       Email: formSubmit.Email.toLowerCase(),
     });

@@ -2,10 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./OrderDetailScreen.scss";
-import { Player } from "video-react";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
 import Loader from "../../Components/Loader/Loader";
-
+import moment from "moment";
 function OrderDetailScreen() {
   const { id } = useParams();
   const { isLoading } = useLoadingWithRefreash();
@@ -33,7 +32,6 @@ function OrderDetailScreen() {
     CarFrontRightTypeImage,
     CarBackRightTypeImage,
     CarBackLeftTypeImage,
-    CarVideoClip,
     DeliveryTime,
     DeliveryDate,
     EstimatedDeliveryDateandTime,
@@ -204,20 +202,6 @@ function OrderDetailScreen() {
           <img src={`${CarBackLeftTypeImage}`} alt="Car Back Left Type" />
         </>
       )}
-      {CarVideoClip && (
-        <>
-          <p>
-            <span>Car Video Clip:</span>
-          </p>
-          <div className="playvide">
-            <Player
-              playsInline
-              poster={`${CarFrontSideImage}`}
-              src={`${CarVideoClip}`}
-            />
-          </div>
-        </>
-      )}
 
       {DeliveryTime ||
         (DeliveryDate && (
@@ -229,7 +213,7 @@ function OrderDetailScreen() {
       {EstimatedDeliveryDateandTime && (
         <p>
           <span>Estimated Delivery Date and Time:</span>
-          {EstimatedDeliveryDateandTime}
+          {moment(EstimatedDeliveryDateandTime).format("D MMM , h:mm a")}
         </p>
       )}
       {Signature && (
