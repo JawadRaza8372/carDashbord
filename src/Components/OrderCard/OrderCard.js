@@ -4,13 +4,14 @@ import { useNavigate } from "react-router-dom";
 import ButtonsDiv from "../ButtonsDiv/ButtonsDiv";
 import axios from "axios";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
+import { apiurl } from "../../App";
 
 function OrderCard({ name, carnumber, model, date, time, arrival, id }) {
   const navigate = useNavigate();
   const { setisLoading } = useLoadingWithRefreash();
 
   const orderdeltfunc = async () => {
-    await axios.post("/Order/delete", { _id: id });
+    await axios.post(`${apiurl}/Order/delete`, { _id: id });
     setisLoading(true);
   };
   return (

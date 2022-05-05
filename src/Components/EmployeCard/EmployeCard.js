@@ -6,6 +6,7 @@ import CustomModel from "../CustomModel/CustomModel";
 import OrderCard from "../OrderCard/OrderCard";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
 import "./EmployeCard.scss";
+import { apiurl } from "../../App";
 function EmployeCard({ Name, Email, pNumber, IdentityNumber, Address, id }) {
   const [show, setShow] = useState(false);
   const { orders } = useSelector((state) => state.project);
@@ -19,7 +20,7 @@ function EmployeCard({ Name, Email, pNumber, IdentityNumber, Address, id }) {
 
   const [showtype, setshowtype] = useState("1");
   const employdeltfunc = async () => {
-    await axios.post("/Employee/deleteUser", {
+    await axios.post(`${apiurl}/Employee/deleteUser`, {
       Email: Email,
     });
     setisLoading(true);
