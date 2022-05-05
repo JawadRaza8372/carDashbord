@@ -3,9 +3,13 @@ import "./AddUserScreen.scss";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setEmploys } from "../../store/projectSlice";
+import { apiurl } from "../../App";
+import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
+
 function AddUserScreen() {
-  const apiurl = "https://cardeliveryapplication.herokuapp.com";
   const dispatch = useDispatch();
+  const { setisLoading, isLoading } = useLoadingWithRefreash();
+
   const [formSubmit, setformSubmit] = useState({
     Name: "",
     Email: "",
@@ -16,13 +20,13 @@ function AddUserScreen() {
   });
   const adduserfunc = async (e) => {
     e.preventDefault();
-    const rest = await axios.post(`${apiurl}/Employee/signup`, formSubmit);
+    const rest = await axios.post(`/Employee/signup`, {
+      ...formSubmit,
+      Email: formSubmit.Email.toLowerCase(),
+    });
     if (rest.data.msg) {
       alert(rest.data.msg);
-      const resul = await axios.get(`${apiurl}/Employee/`);
-      if (resul.data.length > 0) {
-        dispatch(setEmploys({ employs: resul.data }));
-      }
+      setisLoading(true);
       setformSubmit({
         Name: "",
         Email: "",

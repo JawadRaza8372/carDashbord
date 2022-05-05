@@ -73,3 +73,37 @@
     color: $text_color;
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .modelbgdiv {
+    .modelcontainer {
+      .mainContain {
+        .ordercontain {
+          @include gridSystem(2);
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .modelbgdiv {
+    .modelcontainer {
+      .mainContain {
+        .ordercontain {
+          @include gridSystem(1);
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .modelbgdiv {
+    .modelcontainer {
+      .mainContain {
+        .ordercontain {
+          @include gridSystem(1);
+        }
+      }
+    }
+  }
+}

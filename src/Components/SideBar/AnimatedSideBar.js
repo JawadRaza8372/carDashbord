@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AnimatedSideBar.scss";
 import AcUnitIcon from "@material-ui/icons/AcUnit";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -7,7 +7,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
 import AddLocationIcon from "@material-ui/icons/AddLocation";
 import MenuBook from "@material-ui/icons/MenuBook";
-
+import { useNavigate, useLocation } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PersonIcon from "@material-ui/icons/Person";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
@@ -16,9 +16,15 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 import LinkButton from "./LinkButton";
 import { setAuth } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
+import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
+import Loader from "../Loader/Loader";
 function AnimatedSideBar({ children }) {
+  const navigate = useNavigate();
+  const { isLoading } = useLoadingWithRefreash();
   const [expand, setexpand] = useState(false);
   const dispatch = useDispatch();
+  const [activeLogo, setactiveLogo] = useState(false);
+  const [screenSize, setscreenSize] = useState(null);
   const navArry = [
     { title: "Employes", icon: <PersonIcon id="navIcon" />, link: "/userList" },
     { title: "Orders", icon: <MenuBook id="navIcon" />, link: "/orders" },
@@ -28,6 +34,27 @@ function AnimatedSideBar({ children }) {
       link: "/addusers",
     },
   ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setscreenSize(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+    };
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  useEffect(() => {
+    if (screenSize < 480) {
+      setactiveLogo(true);
+    } else {
+      setactiveLogo(false);
+    }
+  }, [screenSize]);
+
+  if (isLoading === true) {
+    <Loader />;
+  }
   return (
     <section className="mainContainer">
       <div className={expand ? "sidebar active" : "sidebar"}>
@@ -36,11 +63,13 @@ function AnimatedSideBar({ children }) {
             <DirectionsCar id="logoicon" />
             <div className="logoName">Admin Panel</div>
           </div>
-          {expand ? (
+          {expand && !activeLogo ? (
             <CloseIcon id="menuIcon" onClick={() => setexpand(false)} />
-          ) : (
+          ) : !expand && !activeLogo ? (
             <MenuIcon id="menuIcon" onClick={() => setexpand(true)} />
-          )}
+          ) : activeLogo ? (
+            <DirectionsCar id="logoImg" onClick={() => navigate("/")} />
+          ) : null}
         </div>
         <ul className="navList">
           {navArry.map((dat, index) => (
@@ -65,7 +94,13 @@ function AnimatedSideBar({ children }) {
           </div>
         </div>
       </div>
-      <div className="mainContentContainer">{children}</div>
+      <div
+        className={
+          expand ? "mainContentContainer active" : "mainContentContainer"
+        }
+      >
+        {children}
+      </div>
     </section>
   );
 }

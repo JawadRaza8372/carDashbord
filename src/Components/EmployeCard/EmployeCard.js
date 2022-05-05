@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ButtonsDiv from "../ButtonsDiv/ButtonsDiv";
 import CustomModel from "../CustomModel/CustomModel";
 import OrderCard from "../OrderCard/OrderCard";
+import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
 import "./EmployeCard.scss";
 function EmployeCard({ Name, Email, pNumber, IdentityNumber, Address, id }) {
   const [show, setShow] = useState(false);
@@ -13,7 +15,15 @@ function EmployeCard({ Name, Email, pNumber, IdentityNumber, Address, id }) {
   const notcompleted = orders.filter(
     (dat) => dat.Arrival === false && dat.EmployeeID === id
   );
+  const { setisLoading } = useLoadingWithRefreash();
+
   const [showtype, setshowtype] = useState("1");
+  const employdeltfunc = async () => {
+    await axios.post("/Employee/deleteUser", {
+      Email: Email,
+    });
+    setisLoading(true);
+  };
   return (
     <>
       <div className="employCard">
@@ -37,10 +47,7 @@ function EmployeCard({ Name, Email, pNumber, IdentityNumber, Address, id }) {
           <span>Address:</span>
           {Address}
         </p>
-        <ButtonsDiv
-          deltFun={() => alert("Api nhi hy")}
-          morefunct={() => setShow(!show)}
-        />
+        <ButtonsDiv deltFun={employdeltfunc} morefunct={() => setShow(!show)} />
       </div>
       <CustomModel showModel={show} toggleModel={() => setShow(!show)}>
         <div className="btndiv">

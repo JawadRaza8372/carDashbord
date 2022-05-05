@@ -2,9 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import OrderCard from "../../Components/OrderCard/OrderCard";
 import "./OrderScreen.scss";
+
 function OrderScreen() {
   const { orders } = useSelector((state) => state.project);
   console.log(orders.length);
+
   return (
     <div className="cardContanier">
       {orders.map((dat) => (

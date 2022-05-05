@@ -142,6 +142,21 @@
     .logoContent {
       position: relative;
       margin: 5px 0;
+      #logoImg {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        top: 50%;
+        line-height: 50px;
+        left: 30%;
+        transform: translateX(-50%);
+        transform: translateY(-50%);
+        color: $secondry_color;
+        cursor: pointer;
+      }
       #menuIcon {
         position: absolute;
         font-size: 28px !important;

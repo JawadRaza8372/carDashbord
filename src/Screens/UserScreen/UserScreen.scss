@@ -6,3 +6,18 @@
   overflow-x: hidden;
   padding: 20px 0;
 }
+@media only screen and (max-width: 992px) {
+  .usercont {
+    @include gridSystem(3);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .usercont {
+    @include gridSystem(2);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .usercont {
+    @include gridSystem(1);
+  }
+}

@@ -6,3 +6,19 @@
   overflow-x: hidden;
   padding: 20px 0;
 }
+
+@media only screen and (max-width: 992px) {
+  .cardContanier {
+    @include gridSystem(3);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .cardContanier {
+    @include gridSystem(2);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .cardContanier {
+    @include gridSystem(1);
+  }
+}

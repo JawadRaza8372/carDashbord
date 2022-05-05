@@ -2,8 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import EmployeCard from "../../Components/EmployeCard/EmployeCard";
 import "./UserScreen.scss";
+
 function UserScreen() {
   const { employs } = useSelector((state) => state.project);
+
   return (
     <div className="usercont">
       {employs.map((dat) => {

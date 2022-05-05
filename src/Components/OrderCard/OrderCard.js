@@ -2,8 +2,17 @@ import React from "react";
 import "./OrderCard.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import ButtonsDiv from "../ButtonsDiv/ButtonsDiv";
+import axios from "axios";
+import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
+
 function OrderCard({ name, carnumber, model, date, time, arrival, id }) {
   const navigate = useNavigate();
+  const { setisLoading, isLoading } = useLoadingWithRefreash();
+
+  const orderdeltfunc = async () => {
+    await axios.post("/Order/delete", { _id: id });
+    setisLoading(true);
+  };
   return (
     <div className="ordrCard">
       <p>
@@ -26,7 +35,10 @@ function OrderCard({ name, carnumber, model, date, time, arrival, id }) {
         <span>Arrival:</span>
         {arrival ? "True" : "False"}
       </p>
-      <ButtonsDiv morefunct={() => navigate(`/order/${id}`)} />
+      <ButtonsDiv
+        morefunct={() => navigate(`/order/${id}`)}
+        deltFun={orderdeltfunc}
+      />
     </div>
   );
 }
