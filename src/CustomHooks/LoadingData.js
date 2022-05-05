@@ -17,7 +17,7 @@ export const useLoadingWithRefreash = () => {
         }
         const result = await axios.get(`${apiurl}/Order/AllOrders`);
         const resul = await axios.get(`${apiurl}/Employee/`);
-        if (result.data.length > 0 && resul.data.length > 0) {
+        if (result.data.length > 0 || resul.data.length > 0) {
           dispatch(setEmploys({ employs: resul.data }));
           dispatch(setOrders({ orders: result.data }));
         }
