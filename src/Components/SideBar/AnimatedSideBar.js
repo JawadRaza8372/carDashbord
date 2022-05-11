@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./AnimatedSideBar.scss";
 import MenuIcon from "@material-ui/icons/Menu";
-import MenuBook from "@material-ui/icons/MenuBook";
 import { useNavigate } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PersonIcon from "@material-ui/icons/Person";
