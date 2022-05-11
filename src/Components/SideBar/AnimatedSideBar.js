@@ -12,7 +12,10 @@ import LinkButton from "./LinkButton";
 import { setAuth } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
+import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
+import PlaylistRemoveIcon from "@material-ui/icons/DepartureBoard";
 import Loader from "../Loader/Loader";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 function AnimatedSideBar({ children }) {
   const navigate = useNavigate();
   const { isLoading } = useLoadingWithRefreash();
@@ -22,11 +25,27 @@ function AnimatedSideBar({ children }) {
   const [screenSize, setscreenSize] = useState(null);
   const navArry = [
     { title: "Employes", icon: <PersonIcon id="navIcon" />, link: "/userList" },
-    { title: "Orders", icon: <MenuBook id="navIcon" />, link: "/orders" },
+    // { title: "Orders", icon: <MenuBook id="navIcon" />, link: "/orders" },
+    {
+      title: "Completed",
+      icon: <PlaylistAddCheckIcon id="navIcon" />,
+      link: "/completed_order",
+    },
+    {
+      title: "Pending",
+      icon: <PlaylistRemoveIcon id="navIcon" />,
+      link: "/pending_orders",
+    },
+
     {
       title: "Add Employe",
       icon: <PersonAddIcon id="navIcon" />,
       link: "/addusers",
+    },
+    {
+      title: "Notification",
+      icon: <NotificationsIcon id="navIcon" />,
+      link: "/send_alert",
     },
   ];
 

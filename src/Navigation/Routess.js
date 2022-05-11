@@ -6,6 +6,9 @@ import AddUserScreen from "../Screens/AddUserScreen/AddUserScreen";
 import OrderScreen from "../Screens/OrderScreen/OrderScreen";
 import OrderDetailScreen from "../Screens/OrderDetailScreen/OrderDetailScreen";
 import { useSelector } from "react-redux";
+import PendingOrderScreen from "../Screens/PendingOrders/PendingOrderScreen";
+import CompletedOrderScreen from "../Screens/CompletedOrders/CompletedOrderScreen";
+import SendNotification from "../Screens/SendNotification/SendNotification";
 
 function Routess() {
   return (
@@ -40,6 +43,30 @@ function Routess() {
         element={
           <ProtectedRoute>
             <OrderScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/completed_order"
+        element={
+          <ProtectedRoute>
+            <CompletedOrderScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/pending_orders"
+        element={
+          <ProtectedRoute>
+            <PendingOrderScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/send_alert"
+        element={
+          <ProtectedRoute>
+            <SendNotification />
           </ProtectedRoute>
         }
       />

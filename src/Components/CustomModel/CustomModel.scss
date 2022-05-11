@@ -73,6 +73,22 @@
     color: $text_color;
   }
 }
+.deltbtn {
+  width: 50%;
+  max-width: 120px;
+  height: 60px;
+  background-color: green;
+  color: $text_color;
+  font-size: 20px;
+}
+.nodeltbtn {
+  width: 50%;
+  max-width: 120px;
+  height: 60px;
+  background-color: red;
+  color: $text_color;
+  font-size: 20px;
+}
 
 @media only screen and (max-width: 992px) {
   .modelbgdiv {

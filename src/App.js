@@ -1,6 +1,6 @@
 import Navigation from "./Navigation/Navigation";
 import { useLoadingWithRefreash } from "./CustomHooks/LoadingData";
-const apiurl = "https://cardevlieryapp.herokuapp.com";
+const apiurl = "https://rentalsystem1998.herokuapp.com";
 
 function App() {
   const { isLoading } = useLoadingWithRefreash();

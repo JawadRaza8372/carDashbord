@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./OrderDetailScreen.scss";
 import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
 import Loader from "../../Components/Loader/Loader";
 import moment from "moment";
+import { jsPDF } from "jspdf";
+
 function OrderDetailScreen() {
   const { id } = useParams();
-  const { isLoading } = useLoadingWithRefreash();
+  const { isLoading, setisLoading } = useLoadingWithRefreash();
 
   const { orders } = useSelector((state) => state.project);
+  useEffect(() => {
+    if (orders.length <= 0) {
+      setisLoading(true);
+    }
+  }, []);
+
   const data = orders.filter((dat) => dat._id === id);
   const {
     ClientName,
@@ -40,16 +48,65 @@ function OrderDetailScreen() {
     EmployeeName,
     Arrival,
   } = data[0];
+  const downloadpdfinfo = () => {
+    const doc = new jsPDF();
+    doc.text(`Client Name: ${ClientName}`, 25, 25);
+    doc.text(`Client Phone Number: ${ClientNumber}`, 25, 35);
+    doc.text(`Client CNIC: ${ClientIdentityNumber}`, 25, 45);
+    doc.text(`Client Emial: ${ClientEmail}`, 25, 55);
+    doc.text(`Car Name: ${CarName}`, 25, 65);
+    doc.text(`Car Model: ${CarModel}`, 25, 75);
+    doc.text(`Car Pirate Number: ${CarPirateNumber}`, 25, 85);
+    doc.text(`Car Current Fuel: ${CarCurrentFuel}`, 25, 95);
+    doc.text(`Car Current KMS: ${CarCurrentKMS}`, 25, 105);
+    doc.text(`Delivery Time: ${DeliveryTime}`, 25, 115);
+    doc.text(`Delivery Date: ${DeliveryDate}`, 25, 125);
+    doc.text(
+      `Estimated Delivery Date and Time: ${EstimatedDeliveryDateandTime}`,
+      25,
+      135
+    );
+    doc.text(`Employee Email: ${EmployeeEmail}`, 25, 145);
+    doc.text(`Employee Name: ${EmployeeName}`, 25, 155);
+    doc.text(`Arrival :${Arrival}`, 25, 165);
+
+    doc.save(`order_${id}_info`);
+  };
   if (isLoading) {
     return <Loader />;
   }
+
   return (
     <div className="orderdeltscreen">
       <div className="ordernumber">
         <h1>Order Details</h1>
         <span>{id}</span>
       </div>
-
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "row",
+        }}
+      >
+        <button
+          style={{
+            width: "100%",
+            maxWidth: "150px",
+            height: "60px",
+            color: "#022c43",
+            background: "#fff61b",
+            fontSize: "20px",
+            fontWeight: "bold",
+            margin: "10px 0",
+          }}
+          onClick={downloadpdfinfo}
+        >
+          downlod pdf
+        </button>
+      </div>
       {ClientName && (
         <p>
           <span>Client Name:</span>
