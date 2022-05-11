@@ -16,7 +16,7 @@ function OrderDetailScreen() {
     if (orders.length <= 0) {
       setisLoading(true);
     }
-  }, []);
+  }, [orders, setisLoading]);
 
   const data = orders.filter((dat) => dat._id === id);
   const {
