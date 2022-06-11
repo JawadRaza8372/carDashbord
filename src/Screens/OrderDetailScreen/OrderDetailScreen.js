@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./OrderDetailScreen.scss";
@@ -10,7 +10,10 @@ import { jsPDF } from "jspdf";
 function OrderDetailScreen() {
 	const { id } = useParams();
 	const { isLoading, setisLoading } = useLoadingWithRefreash();
-
+	const [showImg, setshowImg] = useState(false);
+	const toggleFuc = () => {
+		setshowImg(!showImg);
+	};
 	const { orders } = useSelector((state) => state.project);
 	useEffect(() => {
 		if (orders.length <= 0) {
@@ -87,7 +90,7 @@ function OrderDetailScreen() {
 					width: "100%",
 					display: "flex",
 					alignItems: "center",
-					justifyContent: "center",
+					justifyContent: "space-evenly",
 					flexDirection: "row",
 				}}>
 				<button
@@ -96,13 +99,27 @@ function OrderDetailScreen() {
 						maxWidth: "150px",
 						height: "60px",
 						color: "#282a33",
-						background: "#e94c3d",
 						fontSize: "20px",
 						fontWeight: "bold",
 						margin: "10px 0",
+						border: "2px solid #282a33",
 					}}
 					onClick={downloadpdfinfo}>
 					downlod pdf
+				</button>
+				<button
+					style={{
+						width: "100%",
+						maxWidth: "150px",
+						height: "60px",
+						color: "#e94c3d",
+						fontSize: "20px",
+						fontWeight: "bold",
+						margin: "10px 0",
+						border: "2px solid #e94c3d",
+					}}
+					onClick={toggleFuc}>
+					{showImg ? "Hide Images" : "Show Images"}
 				</button>
 			</div>
 			{ClientName && (
@@ -129,22 +146,22 @@ function OrderDetailScreen() {
 					{ClientEmail ? ClientEmail : "Not Available"}
 				</p>
 			)}
-			{ClientFrontIDcard && (
-				<>
-					<p>
-						<span>Client Front side CNIC:</span>
-					</p>
-					<img src={`${ClientFrontIDcard}`} alt='Client Front side CNIC' />
-				</>
+			{EmployeeEmail && (
+				<p>
+					<span>Employe Email:</span>
+					{EmployeeEmail ? EmployeeEmail : "Not Available"}
+				</p>
 			)}
-			{ClientBackIDcard && (
-				<>
-					<p>
-						<span>Client Back side CNIC:</span>
-					</p>
-					<img src={`${ClientBackIDcard}`} alt='Client Back side CNIC' />
-				</>
+			{EmployeeName && (
+				<p>
+					<span>Employe Name:</span>
+					{EmployeeName ? EmployeeName : "Not Available"}
+				</p>
 			)}
+			<p>
+				<span>Completed:</span>
+				{Arrival ? "True" : "False"}
+			</p>
 			{CarName && (
 				<p>
 					<span>Car Name:</span>
@@ -176,88 +193,6 @@ function OrderDetailScreen() {
 					{CarCurrentKMS ? CarCurrentKMS : "Not Available"}
 				</p>
 			)}
-			{CarFrontSideImage && (
-				<>
-					<p>
-						<span>Car Front Side Image:</span>
-					</p>
-					<img src={`${CarFrontSideImage}`} alt='Car Front Side ' />
-				</>
-			)}
-			{CarLeftSideImage && (
-				<>
-					<p>
-						<span>Car Left Side Image:</span>
-					</p>
-					<img src={`${CarLeftSideImage}`} alt='Car Left Side ' />
-				</>
-			)}
-			{CarRightSideImage && (
-				<>
-					<p>
-						<span>Car Right Side Image:</span>
-					</p>
-					<img src={`${CarRightSideImage}`} alt='Car Right Side ' />
-				</>
-			)}
-
-			{CarRightSideImage && (
-				<>
-					<p>
-						<span>Car Right Side Image:</span>
-					</p>
-					<img src={`${CarRightSideImage}`} alt='Car Right Side ' />
-				</>
-			)}
-			{CarBackSideImage && (
-				<>
-					<p>
-						<span>Car Back Side Image:</span>
-					</p>
-					<img src={`${CarBackSideImage}`} alt='Car Back Side ' />
-				</>
-			)}
-			{CarNumberPlateImage && (
-				<>
-					<p>
-						<span>Car Number Plate Image:</span>
-					</p>
-					<img src={`${CarNumberPlateImage}`} alt='Car Number Plate ' />
-				</>
-			)}
-			{CarFrontLeftTypeImage && (
-				<>
-					<p>
-						<span>Car Front Left Type Image:</span>
-					</p>
-					<img src={`${CarFrontLeftTypeImage}`} alt='Car Front Left Type ' />
-				</>
-			)}
-			{CarFrontRightTypeImage && (
-				<>
-					<p>
-						<span>Car Front Right Type Image:</span>
-					</p>
-					<img src={`${CarFrontRightTypeImage}`} alt='Car Front Right Type' />
-				</>
-			)}
-			{CarBackRightTypeImage && (
-				<>
-					<p>
-						<span>Car Back Right Type Image:</span>
-					</p>
-					<img src={`${CarBackRightTypeImage}`} alt='Car Back Right Type' />
-				</>
-			)}
-			{CarBackLeftTypeImage && (
-				<>
-					<p>
-						<span>Car Back Left Type Image:</span>
-					</p>
-					<img src={`${CarBackLeftTypeImage}`} alt='Car Back Left Type' />
-				</>
-			)}
-
 			{DeliveryTime ||
 				(DeliveryDate && (
 					<p>
@@ -271,7 +206,105 @@ function OrderDetailScreen() {
 					{moment(EstimatedDeliveryDateandTime).format("D MMM , h:mm a")}
 				</p>
 			)}
-			{Signature && (
+			{ClientFrontIDcard && showImg && (
+				<>
+					<p>
+						<span>Client Front side CNIC:</span>
+					</p>
+					<img src={`${ClientFrontIDcard}`} alt='Client Front side CNIC' />
+				</>
+			)}
+			{ClientBackIDcard && showImg && (
+				<>
+					<p>
+						<span>Client Back side CNIC:</span>
+					</p>
+					<img src={`${ClientBackIDcard}`} alt='Client Back side CNIC' />
+				</>
+			)}
+			{CarFrontSideImage && showImg && (
+				<>
+					<p>
+						<span>Car Front Side Image:</span>
+					</p>
+					<img src={`${CarFrontSideImage}`} alt='Car Front Side ' />
+				</>
+			)}
+			{CarLeftSideImage && showImg && (
+				<>
+					<p>
+						<span>Car Left Side Image:</span>
+					</p>
+					<img src={`${CarLeftSideImage}`} alt='Car Left Side ' />
+				</>
+			)}
+			{CarRightSideImage && showImg && (
+				<>
+					<p>
+						<span>Car Right Side Image:</span>
+					</p>
+					<img src={`${CarRightSideImage}`} alt='Car Right Side ' />
+				</>
+			)}
+
+			{CarRightSideImage && showImg && (
+				<>
+					<p>
+						<span>Car Right Side Image:</span>
+					</p>
+					<img src={`${CarRightSideImage}`} alt='Car Right Side ' />
+				</>
+			)}
+			{CarBackSideImage && showImg && (
+				<>
+					<p>
+						<span>Car Back Side Image:</span>
+					</p>
+					<img src={`${CarBackSideImage}`} alt='Car Back Side ' />
+				</>
+			)}
+			{CarNumberPlateImage && showImg && (
+				<>
+					<p>
+						<span>Car Number Plate Image:</span>
+					</p>
+					<img src={`${CarNumberPlateImage}`} alt='Car Number Plate ' />
+				</>
+			)}
+			{CarFrontLeftTypeImage && showImg && (
+				<>
+					<p>
+						<span>Car Front Left Type Image:</span>
+					</p>
+					<img src={`${CarFrontLeftTypeImage}`} alt='Car Front Left Type ' />
+				</>
+			)}
+			{CarFrontRightTypeImage && showImg && (
+				<>
+					<p>
+						<span>Car Front Right Type Image:</span>
+					</p>
+					<img src={`${CarFrontRightTypeImage}`} alt='Car Front Right Type' />
+				</>
+			)}
+			{CarBackRightTypeImage && showImg && (
+				<>
+					<p>
+						<span>Car Back Right Type Image:</span>
+					</p>
+					<img src={`${CarBackRightTypeImage}`} alt='Car Back Right Type' />
+				</>
+			)}
+			{CarBackLeftTypeImage && showImg && (
+				<>
+					<p>
+						<span>Car Back Left Type Image:</span>
+					</p>
+					<img src={`${CarBackLeftTypeImage}`} alt='Car Back Left Type' />
+				</>
+			)}
+
+			{Signature && showImg && (
 				<>
 					<p>
 						<span>Signature:</span>
@@ -279,22 +312,6 @@ function OrderDetailScreen() {
 					<img src={`${Signature}`} alt='Signature' />
 				</>
 			)}
-			{EmployeeEmail && (
-				<p>
-					<span>Employe Email:</span>
-					{EmployeeEmail ? EmployeeEmail : "Not Available"}
-				</p>
-			)}
-			{EmployeeName && (
-				<p>
-					<span>Employe Name:</span>
-					{EmployeeName ? EmployeeName : "Not Available"}
-				</p>
-			)}
-			<p>
-				<span>Completed:</span>
-				{Arrival ? "True" : "False"}
-			</p>
 		</div>
 	);
 }
