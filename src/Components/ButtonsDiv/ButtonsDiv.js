@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./ButtonsDiv.scss";
 import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import CustomModel from "../CustomModel/CustomModel";
 function ButtonsDiv({ deltFun, morefunct }) {
 	const [showmodel, setshowmodel] = useState(false);

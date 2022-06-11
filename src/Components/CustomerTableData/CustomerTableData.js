@@ -5,7 +5,6 @@ import ButtonsDiv from "../../Components/ButtonsDiv/ButtonsDiv";
 import CustomModel from "../CustomModel/CustomModel";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import OrderCard from "../OrderCard/OrderCard";
 import OrderTableData from "../../Components/OrderTableData/OrderTableData";
 
 function CustomerTableData({ id, name, email, number, identityNumbr }) {
