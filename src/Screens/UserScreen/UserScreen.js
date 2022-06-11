@@ -1,17 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import EmployeCard from "../../Components/EmployeCard/EmployeCard";
 import "./UserScreen.scss";
-import ButtonsDiv from "../../Components/ButtonsDiv/ButtonsDiv";
 import DataUnavl from "../Data Unavilble/DataUnavl";
-import { useLoadingWithRefreash } from "../../CustomHooks/LoadingData";
-import { apiurl } from "../../App";
-import axios from "axios";
 import CustomerTableData from "../../Components/CustomerTableData/CustomerTableData";
 import * as XLSX from "xlsx";
 function UserScreen() {
 	const { employs } = useSelector((state) => state.project);
-	const { setisLoading } = useLoadingWithRefreash();
 	const exportmysheet = () => {
 		var wb = XLSX.utils.book_new();
 		var ws = XLSX.utils.json_to_sheet(employs);

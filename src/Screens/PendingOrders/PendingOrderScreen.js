@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import OrderCard from "../../Components/OrderCard/OrderCard";
 import OrderTableData from "../../Components/OrderTableData/OrderTableData";
 import DataUnavl from "../Data Unavilble/DataUnavl";
 import "./PedingOrder.scss";
